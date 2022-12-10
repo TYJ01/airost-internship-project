@@ -5,6 +5,7 @@ import kociemba
 import time
 import copy
 from cube_window import cube_window
+import keyboard
 
 
 def openwebcam():
@@ -78,8 +79,8 @@ def getcontuors(blurimg,img, imgContours):
             match_orange(blurimg, imgContours, x_, y_, w, h)
             update_face_state(coordinates, 'O')
             update_face_state(coordinates, 'W')
-            cube_window(cube_face)
-
+            cube_win =cube_window(cube_face)
+            return cube_win
 def match_color(imgvar, imgcontours):
 
     #image = cv.imread(filepath)
@@ -481,8 +482,8 @@ def update_face_state(coordinate, color):
     global cube_face
     if color != 'W':
         for coor in coordinate:
-            if cube_face[coor[0]][coor[1]] == 0 :
-                cube_face[coor[0]][coor[1]] = color
+            #if cube_face[coor[0]][coor[1]] == 0 :
+            cube_face[coor[0]][coor[1]] = color
     else:
         for i in range(3):
             for j in range(3):
@@ -547,26 +548,29 @@ def detect_cube():
                 cv.imshow("dil", dilimg)
                 #match_color(blur,imgContours)
                 #match_color(capvar)
+
                 if cv.waitKey(20) & 0xFF == ord('q'):
+
+                    blank = getcontuors(blur, dilimg, imgContours)
+                    cv.imshow("imgcontour", imgContours)
+                    #update_cube_state(cube_face)
+                    print(cube_face)
+                if cv.waitKey(20) & 0xFF == ord('s'):
+                    #keyboard.wait('s')
+                    print(k+1)
+                    update_cube_state(cube_face)
+                    print(cube_face)
                     cube_face = []
                     for i in range(3):
                         cube_face.append([])
                         for j in range(3):
                             cube_face[i].append(0)
-                    getcontuors(blur, dilimg, imgContours)
-                    cv.imshow("imgcontour", imgContours)
-                    #update_cube_state(cube_face)
-                    print(cube_face)
-                    time.sleep(2)
-                if cv.waitKey(20) & 0xFF == ord('s'):
-                    print(k+1)
-                    update_cube_state(cube_face)
-                    print(cube_face)
 
                     break
 
             except AttributeError:
                 continue
+
     print(cube_state)
     return copy.deepcopy(cube_state)
 

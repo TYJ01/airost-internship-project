@@ -40,8 +40,8 @@ def getcontuor1(blurimg,img, imgContours,step,i):
                 cv.rectangle(imgContours,(x_, y_),(x_+w,y_+h),(0,255,0), 3)
                 cv.putText(imgContours, "Rubik's Cube", (x_+w+10,y_+h+10), cv.FONT_HERSHEY_COMPLEX, 0.7, (0,255,0),1)
                 text = "step : " + str(i)
-                cv.putText(imgContours, text, (x_ + w + 10, y_ + h - 20), cv.FONT_HERSHEY_COMPLEX,
-                       0.7, (0, 255, 0), 1)
+                cv.putText(imgContours, text, ( 50, 50), cv.FONT_HERSHEY_COMPLEX,
+                       0.7, (0, 255, 0), 2)
                 step_counter(step,imgContours, x_, y_, w, h)
 
 def getcontuor2(blurimg,img, imgContours,step):
