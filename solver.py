@@ -3,6 +3,7 @@ from conversion import cvt2kociemba
 import kociemba
 from conversion import cvt2env
 from cube_stepsdisplay import display, steps_converter
+import csv
 
 def kociemba_solve():
     global solution
@@ -15,7 +16,18 @@ def kociemba_solve():
     display(solution1)
     return solution
 
-
+def reinforce_solve():
+    global solution
+    cube_state = detect_cube()
+    cube = cvt2env(cube_state)
+    with open('training_set.csv', 'r') as f:
+        reader = csv.reader(f)
+        training = [[int(element) for element in row] for row in reader]
+    with open('training_set.csv', 'r') as f:
+        reader = csv.reader(f)
+        solvedstep = [[int(element) for element in row] for row in reader]
+    if cube in training:
+        solution = solution[training.index(cube)]
 kociemba_solve()
 
 
