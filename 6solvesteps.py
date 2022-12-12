@@ -38,3 +38,7 @@ for shuffle in training:
             temp[temp.index(step)] = "D"
     solvestep.append(temp)
     print(temp)
+
+with open('6solvesteps.csv', 'w') as f:
+    writer = csv.writer(f)
+    writer.writerows(solvestep)
