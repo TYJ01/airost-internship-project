@@ -557,7 +557,10 @@ def detect_cube():
                     print(cube_face)
                 if cv.waitKey(20) & 0xFF == ord('s'):
                     #keyboard.wait('s')
-                    print(k+1)
+                    print(k + 1)
+                    cv.putText(imgContours, "Done Recording, next face", (80, 400), cv.FONT_HERSHEY_COMPLEX, 0.7,
+                               (0, 255, 0), 1)
+                    cv.imshow("imgcontour", imgContours)
                     update_cube_state(cube_face)
                     print(cube_face)
                     cube_face = []

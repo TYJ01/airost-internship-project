@@ -20,14 +20,24 @@ def reinforce_solve():
     global solution
     cube_state = detect_cube()
     cube = cvt2env(cube_state)
-    with open('training_set.csv', 'r') as f:
+    print(cube)
+    with open('training_set6.csv', 'r') as f:
         reader = csv.reader(f)
         training = [[int(element) for element in row] for row in reader]
-    with open('training_set.csv', 'r') as f:
+    with open('6solvesteps.csv', 'r') as f:
         reader = csv.reader(f)
-        solvedstep = [[int(element) for element in row] for row in reader]
-    if cube in training:
-        solution = solution[training.index(cube)]
+        solvedstep = [row for row in reader]
+    cube1 = cube.reshape(1, 54)
+    cube1 = cube1.tolist()
+    cube2 = cube1[0]
+    print(cube1)
+    print(cube2)
+    if cube2 in training:
+        solution = solvedstep[training.index(cube2)]
+        print(training.index(cube2))
+    display(solution)
+
+
 kociemba_solve()
 
 
